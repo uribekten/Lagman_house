@@ -15,6 +15,8 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Type</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tr th:each = "food : ${food}">
@@ -25,30 +27,16 @@
             <td th:text="${food.name}"></td>
             <td th:text="${food.price}"></td>
             <td th:text="${food.foodType}"></td>
+            <td>
+                <a th:href="@{/food/update(id=${food.id})}" class="btn btn-success">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/food/delete(id=${food.id})}" class="btn btn-danger">Remove</a>
+            </td>
         </tr>
     </table>
 
-    <form action="#" th:action="@{/foods}" th:object="${newFood}" method="POST">
-        <div class="form-group">
-            <label for="inputId">ID</label>
-            <input type="text" class="form-control" id="inputId" placeholder="Enter ID" th:field="*{id}">
-        </div>
-        <div class="form-group">
-            <label for="inputName">Name</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Enter Name" th:field="*{name}">
-        </div>
-        <div class="form-group">
-            <label for="inputPrice">Price</label>
-            <input type="text" class="form-control" id="inputPrice" placeholder="Enter Price" th:field="*{price}">
-        </div>
-        <div class="form-group">
-            <label for="foodTypeSelect">Select Type</label>
-            <select class="form-control" id="foodTypeSelect" th:field="*{foodType}">
-                <option th:each="t : ${foodType}" th:value="${t}" th:text="${t}"></option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <a href="#" th:href="@{/food/new}" class="btn btn-primary">New Food</a>
 </div>
 
 </body>
