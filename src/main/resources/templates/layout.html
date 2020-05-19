@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
-    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{~/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">LagmanHouse</title>
 </head>
 <body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Thymeleaf - Bootstrap Select Option</a>
+        <a class="navbar-brand" href="/">LagmanHouse</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
                     <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/foods}">Foods</a>
+                    <a class="nav-link" th:href="@{/food/list}">Foods</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/contact}">Contact</a>
@@ -37,7 +37,7 @@
     </div>
 </nav>
 
-<div layout:fragment="content" class="container-fluid">
+<div layout:fragment="content" class="container">
     <p>Some text, and this is going to change, accordingly!</p>
 </div>
 

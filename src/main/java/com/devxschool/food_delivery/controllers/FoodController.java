@@ -28,22 +28,55 @@ public class FoodController {
         return "about";
     }
 
-    @GetMapping("/foods")
+    @GetMapping("/food/list")
     public String listFoods(Model model){
 
         model.addAttribute("food", foodList);
-        model.addAttribute("newFood", new Food());
-        model.addAttribute("foodType", Food.FoodType.values());
+      
         return "food_list";
     }
 
-    @PostMapping("/foods")
-    public String createFood(@ModelAttribute Food food){
-        foodList.add(food);
-        return "redirect:/foods";
+    @GetMapping("/food/new")
+    public String createFood(Model model){
+        model.addAttribute("foodType", Food.FoodType.values());
+        model.addAttribute("newFood",new Food());
+        return "create_food";
     }
 
-    @GetMapping("/food_details")
+    @GetMapping("/food/update")
+    public String updateFood(@RequestParam Long id, Model model){
+        Optional<Food> food = foodList.stream().filter(f -> f.getId() == id).findFirst();
+        if (!food.isPresent())
+            return "redirect:/food/new";
+
+        model.addAttribute("newFood",food.get());
+        model.addAttribute("foodType", Food.FoodType.values());
+        return "create_food";
+    }
+
+    @PostMapping("/food")
+    public String createFood(@ModelAttribute Food food){
+        Optional<Food> oldFood = foodList.stream().filter(f -> f.getId() == food.getId()).findFirst();
+        if (oldFood.isPresent()){
+            foodList.remove(oldFood.get());
+            foodList.add(food);
+        } else {
+            foodList.add(food);
+        }
+            
+        return "redirect:/food/list";
+    }
+
+    @GetMapping("/food/delete")
+    public String deleteFood(@RequestParam Long id) {
+        Optional<Food> oldFood = foodList.stream().filter(f -> f.getId() == id).findFirst();
+        if (oldFood.isPresent())
+            foodList.remove(oldFood.get());
+            
+        return "redirect:/food/list";
+    }
+
+    @GetMapping("/food/detail")
     public String getFoodDetails(@RequestParam Long id, Model model){
         Optional<Food> food = foodList.stream().filter(f -> f.getId() == id).findFirst();
         if (!food.isPresent())
