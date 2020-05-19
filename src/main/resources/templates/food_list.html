@@ -22,7 +22,7 @@
         <tr th:each = "food : ${food}">
 
             <td>
-                <a th:href="@{/food_details(id=${food.id})}" th:text="${food.id}"></a>
+                <a th:href="@{/food/detail(id=${food.id})}" th:text="${food.id}"></a>
             </td>
             <td th:text="${food.name}"></td>
             <td th:text="${food.price}"></td>
