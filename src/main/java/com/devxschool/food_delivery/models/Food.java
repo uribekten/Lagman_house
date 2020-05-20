@@ -2,24 +2,21 @@ package com.devxschool.food_delivery.models;
 
 public class Food {
 
-    public enum FoodType{
-        Beverages,
-        Appetizers,
-        MainDish
-    }
-
     private Long id;
     private Float price;
     private String name;
+    private String description;
     private FoodType foodType;
 
     public Food(){
 
     }
-    public Food(Long id, String name, Float price) {
+    public Food(Long id, String name, Float price, String description, FoodType foodType) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.setDescription(description);
+        this.foodType = foodType;
     }
 
     public Long getId() {
@@ -53,5 +50,14 @@ public class Food {
     public void setFoodType(FoodType foodType) {
         this.foodType = foodType;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
 }
