@@ -1,4 +1,23 @@
 # food_delivery_project
+
+## To deploy
+
+- To create a build file 
+```shell script
+./mvnw install
+```
+If you see `BUILD SUCCESS` then the build is done.
+
+- To run executable file 
+```shell script
+java -jar target/food_delivery-0.1.jar
+```
+
+- To test if it is running, go to browser and check url
+```
+http://localhost:8080/food/list
+```
+
 # Spring Project 1
 This is project repository which will be followed throughout the course.
 At the end of this project you will have fully functional simple food delivery application - let us call it <strong>Lagman House</strong>.
