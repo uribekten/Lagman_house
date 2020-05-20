@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.devxschool</groupId>
 	<artifactId>food_delivery</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.1</version>
+	<packaging>jar</packaging>
 	<name>food_delivery</name>
 	<description>Food Delivery Application</description>
 
