@@ -1,5 +1,8 @@
 package com.devxschool.food_delivery.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Food {
 
     public enum FoodType{
@@ -8,10 +11,18 @@ public class Food {
         MainDish
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String description;
+
     private Float price;
     private String name;
     private FoodType foodType;
+
+    @ManyToOne
+    private Country countryOfOrigin;
 
     public Food(){
 
@@ -52,6 +63,14 @@ public class Food {
 
     public void setFoodType(FoodType foodType) {
         this.foodType = foodType;
+    }
+
+    public Country getCountryOfOrigin() {
+        return countryOfOrigin;
+    }
+
+    public void setCountryOfOrigin(Country countryOfOrigin) {
+        this.countryOfOrigin = countryOfOrigin;
     }
 
 }
