@@ -15,6 +15,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Type</th>
+            <th scope="col">Country</th>
             <th></th>
             <th></th>
         </tr>
@@ -27,6 +28,7 @@
             <td th:text="${food.name}"></td>
             <td th:text="${food.price}"></td>
             <td th:text="${food.foodType}"></td>
+            <td th:text="${food.countryOfOrigin}"></td>
             <td>
                 <a th:href="@{/food/update(id=${food.id})}" class="btn btn-success">Edit</a>
             </td>
@@ -35,6 +37,11 @@
             </td>
         </tr>
     </table>
+
+    <form action="#" th:action="@{/food/list_by_price}" method="GET">
+        <input type="text" name="price" class="form-control">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
     <a href="#" th:href="@{/food/new}" class="btn btn-primary">New Food</a>
 </div>
