@@ -6,6 +6,7 @@ import com.devxschool.food_delivery.service.CountryService;
 import com.devxschool.food_delivery.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +55,10 @@ public class FoodController {
     }
 
     @GetMapping("/food/new")
-    public String createFood(Model model){
+    public String createFood(Model model, Authentication authentication){
+        if (!authentication.getAuthorities().contains("ADMIN"))
+            return "redirect:/food/list";
+
         model.addAttribute("foodType", Food.FoodType.values());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("newFood",new Food());
