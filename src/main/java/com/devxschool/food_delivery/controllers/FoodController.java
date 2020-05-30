@@ -56,9 +56,7 @@ public class FoodController {
 
     @GetMapping("/food/new")
     public String createFood(Model model, Authentication authentication){
-        if (!authentication.getAuthorities().contains("ADMIN"))
-            return "redirect:/food/list";
-
+     
         model.addAttribute("foodType", Food.FoodType.values());
         model.addAttribute("countries", countryService.findAll());
         model.addAttribute("newFood",new Food());
