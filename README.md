@@ -17,6 +17,17 @@ java -jar target/food_delivery-0.1.jar
 ```
 http://localhost:8080/food/list
 ```
+## Run on docker
+- Build image
+```bash
+docker build -t devxschool/food_delivery_app .
+```
+- Run on docker
+```bash
+docker run -p 8080:8080 devxschool/food_delivery_app
+```
+
+
 
 # Spring Project 1
 This is project repository which will be followed throughout the course.
