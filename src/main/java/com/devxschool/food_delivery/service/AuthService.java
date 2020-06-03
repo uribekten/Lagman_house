@@ -1,5 +1,6 @@
 package com.devxschool.food_delivery.service;
 
+import com.devxschool.food_delivery.models.CustomUser;
 import com.devxschool.food_delivery.repository.CustomUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,5 +18,9 @@ public class AuthService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws BadCredentialsException {
         return customUserRepository.findCustomUserByUsername(username);
+    }
+
+    public void registerUser(CustomUser customUser){
+        customUserRepository.save(customUser);
     }
 }

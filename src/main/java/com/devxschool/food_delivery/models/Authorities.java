@@ -13,6 +13,11 @@ public class Authorities implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    public Authorities(){}
+    public Authorities(String authority) {
+        this.authority = authority;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

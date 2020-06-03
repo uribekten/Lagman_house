@@ -2,6 +2,8 @@ package com.devxschool.food_delivery.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import java.util.List;
 
 @Entity
 public class Country {

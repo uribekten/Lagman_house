@@ -11,6 +11,27 @@ public class CustomUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
+    String password;
+    String username;
+
+    Boolean accountNonExpired;
+    Boolean accountNonLocked;
+    Boolean credentialsNonExpired;
+    Boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    Collection<Authorities> authorities;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserProfile userProfile;
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -43,17 +64,6 @@ public class CustomUser implements UserDetails {
     public void setAuthorities(Collection<Authorities> authorities) {
         this.authorities = authorities;
     }
-
-    String password;
-    String username;
-
-    Boolean accountNonExpired;
-    Boolean accountNonLocked;
-    Boolean credentialsNonExpired;
-    Boolean enabled;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    Collection<Authorities> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

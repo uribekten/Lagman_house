@@ -2,9 +2,4 @@ target/
 .settings/
 .classpath
 .project
-<<<<<<< HEAD
-.idea
-*.iml
-=======
 .idea/
->>>>>>> 733c60c9bbc53dcbe01ee9e261ed5e810a5a0a5f
