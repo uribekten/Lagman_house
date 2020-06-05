@@ -1,6 +1,7 @@
 package com.devxschool.food_delivery.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class Food {
@@ -16,21 +17,34 @@ public class Food {
     private Long id;
 
     private String description;
-
-    private Float price;
+    private String imageUrl;
+    private BigDecimal price;
     private String name;
     private FoodType foodType;
-
-    @ManyToOne
-    private Country countryOfOrigin;
 
     public Food(){
 
     }
-    public Food(Long id, String name, Float price) {
+    public Food(Long id, String name, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -49,11 +63,11 @@ public class Food {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -63,14 +77,6 @@ public class Food {
 
     public void setFoodType(FoodType foodType) {
         this.foodType = foodType;
-    }
-
-    public Country getCountryOfOrigin() {
-        return countryOfOrigin;
-    }
-
-    public void setCountryOfOrigin(Country countryOfOrigin) {
-        this.countryOfOrigin = countryOfOrigin;
     }
 
 }
