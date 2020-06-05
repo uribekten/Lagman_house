@@ -28,7 +28,6 @@
             <td th:text="${food.name}"></td>
             <td th:text="${food.price}"></td>
             <td th:text="${food.foodType}"></td>
-            <td th:text="${food.countryOfOrigin}"></td>
             <td>
                 <a th:href="@{/food/update(id=${food.id})}" class="btn btn-success">Edit</a>
             </td>
@@ -43,7 +42,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <a href="#" th:href="@{/food/new}" class="btn btn-primary">New Food</a>
+    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="#" th:href="@{/food/new}" class="btn btn-primary">New Food</a>
 </div>
 
 </body>

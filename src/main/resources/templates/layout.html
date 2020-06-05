@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link th:rel="stylesheet" th:href="@{~/webjars/bootstrap/4.4.1/css/bootstrap.min.css}">
@@ -27,11 +28,20 @@
                     <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/food/list}">Foods</a>
+                    <a class="nav-link" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" th:href="@{/admin/food/list}">Foods</a>
+                    <a class="nav-link" th:if="${#authorization.expression('hasAuthority(''USER'')')}" th:href="@{/public/food/list}">Foods</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/contact}">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/user/register}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+                </li>
+
             </ul>
         </div>
     </div>
