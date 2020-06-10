@@ -18,7 +18,7 @@ java -jar target/food_delivery-0.1.jar
 http://localhost:8080/food/list
 ```
 
-#AWS S3 Configs
+# AWS S3 Configs
 Our app is getting AWS Credentials from environment variables. So before running the application you should set below environment variables:
 
 ```
