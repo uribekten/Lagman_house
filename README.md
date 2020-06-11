@@ -18,6 +18,14 @@ java -jar target/food_delivery-0.1.jar
 http://localhost:8080/food/list
 ```
 
+# AWS S3 Configs
+Our app is getting AWS Credentials from environment variables. So before running the application you should set below environment variables:
+
+```
+export AWS_ACCESS_KEY_ID=your_access_key_id
+export AWS_SECRET_ACCESS_KEY=your_secret_access_key
+```
+
 # Spring Project 1
 This is project repository which will be followed throughout the course.
 At the end of this project you will have fully functional simple food delivery application - let us call it <strong>Lagman House</strong>.

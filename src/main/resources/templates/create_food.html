@@ -8,7 +8,7 @@
 <body>
 <div layout:fragment="content">
 
-    <form action="#" th:action="@{/food}" th:object="${newFood}" method="POST">
+    <form action="#" th:action="@{/admin/food/new}" th:object="${newFood}" method="POST">
         <div class="form-group">
             <label for="inputId">ID</label>
             <input type="text" class="form-control" id="inputId" placeholder="Enter ID" th:field="*{id}">
@@ -25,6 +25,12 @@
             <label for="foodTypeSelect">Select Type</label>
             <select class="form-control" id="foodTypeSelect" th:field="*{foodType}">
                 <option th:each="t : ${foodType}" th:value="${t}" th:text="${t}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="foodImage">Select Image</label>
+            <select class="form-control" id="foodImage" th:field="*{imageUrl}">
+                <option th:each="i : ${images}" th:value="${i.imageUrl}" th:text="${i.imageName}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

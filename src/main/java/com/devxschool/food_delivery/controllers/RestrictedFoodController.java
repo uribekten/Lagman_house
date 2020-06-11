@@ -1,6 +1,7 @@
 package com.devxschool.food_delivery.controllers;
 
 import com.devxschool.food_delivery.models.Food;
+import com.devxschool.food_delivery.service.AwsS3ServiceImpl;
 import com.devxschool.food_delivery.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -24,6 +25,9 @@ public class RestrictedFoodController {
     @Autowired
     FoodService foodService;
 
+    @Autowired
+    AwsS3ServiceImpl awsS3Service;
+
     @GetMapping(LIST_URL)
     public String listFoods(Model model){
 
@@ -37,6 +41,7 @@ public class RestrictedFoodController {
 
         model.addAttribute("foodType", Food.FoodType.values());
         model.addAttribute("newFood",new Food());
+        model.addAttribute("images", awsS3Service.listAll());
         return "create_food";
     }
 
@@ -55,6 +60,7 @@ public class RestrictedFoodController {
         if (!food.isPresent())
             return "redirect:"+NEW_URL;
 
+        model.addAttribute("images", awsS3Service.listAll());
         model.addAttribute("newFood",food.get());
         model.addAttribute("foodType", Food.FoodType.values());
         return "create_food";
