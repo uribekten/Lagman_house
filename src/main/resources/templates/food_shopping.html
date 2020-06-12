@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>LagmanHouse ShoppingList</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <h1 class="my-4">LagmanHouse</h1>
+            <div class="list-group">
+                <th:block th:each="foodType :${foodTypes}">
+                    <a href="#" class="list-group-item"><p th:text="${foodType}"></p> </a>
+                </th:block>
+            </div>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <th:block th:each="food : ${foodList}">
+                        <div class="carousel-item active">
+                            <img class="d-block img-fluid" th:src="${food.imageUrl}" width="900" height="350" alt="First slide">
+                        </div>
+                    </th:block>
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <div class="row">
+
+                <th:block th:each="food :${foodList}">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            <a href="#"><img th:src="@{${food.imageUrl}}" class="img-thumbnail" width="300" height="300"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#"><p th:text="${food.name}"></p></a>
+                                </h4>
+                                <h5 th:text="${food.price}"></h5>
+                                <p class="card-text" th:text="${food.description}"></p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                <a th:href="@{/cart/add/{id}(id=${food.id})}" class="btn btn-primary">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+
+</body>
+</html>
