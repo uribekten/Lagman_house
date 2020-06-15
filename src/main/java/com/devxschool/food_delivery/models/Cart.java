@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Cart {
 
@@ -67,16 +68,12 @@ public class Cart {
     }
 
     public void removeCartItem(CartItem cartItem) {
-        System.out.println("Cart: removing it!");
-        Optional<CartItem> oldCartItem = cartItems
+        List<CartItem> filteredCartList = cartItems
                 .stream()
-                .filter(ci -> ci.getFood().getId() == cartItem.getFood().getId())
-                .findAny();
+                .filter(ci -> ci.getFood().getId() != cartItem.getFood().getId())
+                .collect(Collectors.toList());
 
-        if (oldCartItem.isPresent()){
-            System.out.println("Cart: I found it!");
-            cartItems.remove(oldCartItem);
-        }
+        this.setCartItems(filteredCartList);
     }
 
     public String getUsername() {
