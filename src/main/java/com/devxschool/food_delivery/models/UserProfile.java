@@ -12,6 +12,15 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
     private String fullName;
     private String address;
     private String city;

@@ -66,9 +66,8 @@
                             <h4 class="text-right">Total <strong th:text="${cart.totalPrice}"></strong></h4>
                         </div>
                         <div class="col-xs-3">
-                            <button type="button" class="btn btn-success btn-block">
-                                Checkout
-                            </button>
+
+                            <a th:href="@{/cart/checkout}" class="btn btn-success btn-block">Checkout</a>
                         </div>
                     </div>
                 </div>

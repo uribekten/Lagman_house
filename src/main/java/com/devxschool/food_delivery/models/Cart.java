@@ -14,6 +14,7 @@ public class Cart {
     private List<CartItem> cartItems = new ArrayList<>();
     private BigDecimal totalPrice;
     private String username;
+    private int size;
 
     public UUID getUuid() {
         return uuid;
@@ -82,5 +83,10 @@ public class Cart {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return cartItems.size()+"items";
     }
 }

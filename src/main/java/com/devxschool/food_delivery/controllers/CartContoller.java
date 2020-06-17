@@ -2,13 +2,17 @@ package com.devxschool.food_delivery.controllers;
 
 import com.devxschool.food_delivery.models.Cart;
 import com.devxschool.food_delivery.models.CartItem;
+import com.devxschool.food_delivery.models.CustomUser;
 import com.devxschool.food_delivery.models.Food;
+import com.devxschool.food_delivery.service.AuthService;
 import com.devxschool.food_delivery.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +22,9 @@ public class CartContoller {
 
     @Autowired
     FoodService foodService;
+
+    @Autowired
+    AuthService authService;
 
     @GetMapping("/cart/list")
     public String listCartItems(@ModelAttribute("cart") Cart cart){
@@ -57,6 +64,16 @@ public class CartContoller {
         cart.removeCartItem(cartItem);
 
         return "redirect:/cart/list";
+    }
+
+    @GetMapping("/cart/checkout")
+    public String cartCheckout(@ModelAttribute("cart") Cart cart, Model model, Authentication authentication, Principal principal){
+        if (authentication == null || !authentication.isAuthenticated())
+            return "redirect:/user/register";
+
+        CustomUser customUser = authService.findUserByUsername(principal.getName());
+        model.addAttribute("user", customUser);
+        return "cart_checkout";
     }
 
     @ModelAttribute("cart")
