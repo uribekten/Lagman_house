@@ -69,7 +69,7 @@ public class CartContoller {
     @GetMapping("/cart/checkout")
     public String cartCheckout(@ModelAttribute("cart") Cart cart, Model model, Authentication authentication, Principal principal){
         if (authentication == null || !authentication.isAuthenticated())
-            return "redirect:/user/register";
+            return "redirect:/login";
 
         CustomUser customUser = authService.findUserByUsername(principal.getName());
         model.addAttribute("user", customUser);
