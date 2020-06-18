@@ -1,4 +1,4 @@
-package com.devxschool.food_delivery.security;
+package com.devxschool.food_delivery.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,9 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/public/**").hasAuthority("USER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/", "/login", "/user/register","/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?error")
+                .permitAll()
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/")
                 .and()
