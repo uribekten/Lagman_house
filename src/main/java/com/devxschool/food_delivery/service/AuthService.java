@@ -22,4 +22,8 @@ public class AuthService implements UserDetailsService {
     public void registerUser(CustomUser customUser){
         customUserRepository.save(customUser);
     }
+
+    public CustomUser findUserByUsername(String username){
+        return customUserRepository.findCustomUserByUsername(username);
+    }
 }
