@@ -6,12 +6,18 @@ import com.devxschool.food_delivery.models.CustomUser;
 import com.devxschool.food_delivery.models.Food;
 import com.devxschool.food_delivery.service.AuthService;
 import com.devxschool.food_delivery.service.FoodService;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
+import com.stripe.param.PaymentIntentCreateParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +31,13 @@ public class CartContoller {
 
     @Autowired
     AuthService authService;
+
+    @Value("${stripe.keys.secret}")
+    private String strpeSecretKey;
+
+    @Value("${stripe.keys.public}")
+    private String stripePublicKey;
+
 
     @GetMapping("/cart/list")
     public String listCartItems(@ModelAttribute("cart") Cart cart){
@@ -71,9 +84,33 @@ public class CartContoller {
         if (authentication == null || !authentication.isAuthenticated())
             return "redirect:/login";
 
+        Stripe.apiKey = strpeSecretKey;
+
+        PaymentIntentCreateParams params =
+                PaymentIntentCreateParams.builder()
+                        .setCurrency("usd")
+                        .setAmount(cart.getTotalPrice().longValue() * 100L)
+                        // Verify your integration in this guide by including this parameter
+                        .putMetadata("integration_check", "accept_a_payment")
+                        .build();
+
+        try {
+            PaymentIntent intent = PaymentIntent.create(params);
+            model.addAttribute("client_secret", intent.getClientSecret());
+        } catch (StripeException e) {
+            e.printStackTrace();
+        }
+
         CustomUser customUser = authService.findUserByUsername(principal.getName());
         model.addAttribute("user", customUser);
-        return "cart_checkout";
+        model.addAttribute("stripePublicKey", stripePublicKey);
+
+        return "cart_checkout_new";
+    }
+
+    @GetMapping("/cart/payment_success")
+    public String paymentSuccess(){
+        return "redirect:/order/place";
     }
 
     @ModelAttribute("cart")

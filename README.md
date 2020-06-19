@@ -25,7 +25,12 @@ Our app is getting AWS Credentials from environment variables. So before running
 export AWS_ACCESS_KEY_ID=your_access_key_id
 export AWS_SECRET_ACCESS_KEY=your_secret_access_key
 ```
-
+# Stripe Integration
+In `application.properties` file add below lines with appropriate keys from your stripe dashboard
+```
+stripe.keys.public=pk_test_XXXXX
+stripe.keys.secret=sk_test_XXXXX
+```
 # Spring Project 1
 This is project repository which will be followed throughout the course.
 At the end of this project you will have fully functional simple food delivery application - let us call it <strong>Lagman House</strong>.
