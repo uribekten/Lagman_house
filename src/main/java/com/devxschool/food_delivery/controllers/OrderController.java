@@ -18,13 +18,13 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/place")
+    @GetMapping("/place")
     public String placeOrder(){
-        RestTemplate restTemplate = new RestTemplate();
+        //RestTemplate restTemplate = new RestTemplate();
         //ResponseEntity<PaymentStatus> responseEntity = restTemplate.getForEntity("", PaymentStatus.class);
 
-        PaymentStatus paymentStatus = restTemplate.getForObject("https://lagmanhouse.free.beeceptor.com/payment", PaymentStatus.class);
-        System.out.println("!!!!Status "+paymentStatus.getStatus());
-        return "redirect:/";
+        //PaymentStatus paymentStatus = restTemplate.getForObject("https://lagmanhouse.free.beeceptor.com/payment", PaymentStatus.class);
+        //System.out.println("!!!!Status "+paymentStatus.getStatus());
+        return "place_order";
     }
 }
