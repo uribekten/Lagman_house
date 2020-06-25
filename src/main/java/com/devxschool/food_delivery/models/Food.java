@@ -1,5 +1,9 @@
 package com.devxschool.food_delivery.models;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
 public class Food {
 
     public enum FoodType{
@@ -8,18 +12,39 @@ public class Food {
         MainDish
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Float price;
+
+    private String description;
+    private String imageUrl;
+    private BigDecimal price;
     private String name;
     private FoodType foodType;
 
     public Food(){
 
     }
-    public Food(Long id, String name, Float price) {
+    public Food(Long id, String name, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -38,11 +63,11 @@ public class Food {
         this.name = name;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
