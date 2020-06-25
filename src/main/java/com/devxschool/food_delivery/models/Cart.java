@@ -85,6 +85,12 @@ public class Cart {
         this.username = username;
     }
 
+    public void clearItems(){
+        this.cartItems.clear();
+        this.totalPrice = new BigDecimal(0.0);
+        this.size = 0;
+    }
+
     @Override
     public String toString() {
         return cartItems.size()+"items";
