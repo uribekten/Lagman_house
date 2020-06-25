@@ -84,6 +84,7 @@ public class CartContoller {
         if (authentication == null || !authentication.isAuthenticated())
             return "redirect:/login";
 
+
         Stripe.apiKey = strpeSecretKey;
 
         PaymentIntentCreateParams params =
@@ -102,6 +103,7 @@ public class CartContoller {
         }
 
         CustomUser customUser = authService.findUserByUsername(principal.getName());
+        cart.setUsername(customUser.getUsername());
         model.addAttribute("user", customUser);
         model.addAttribute("stripePublicKey", stripePublicKey);
 

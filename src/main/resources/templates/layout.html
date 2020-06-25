@@ -37,6 +37,12 @@
                     <a class="nav-link" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
                        th:href="@{/admin/images}">Images</a>
                 </li>
+                <li>
+                    <a class="nav-link" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+                       th:href="@{/order/list}">Orders</a>
+                    <a class="nav-link" th:if="${#authorization.expression('hasAuthority(''USER'')')}"
+                       th:href="@{/order/list}">Orders</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/contact}">Contact</a>
                 </li>
@@ -47,7 +53,7 @@
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
                 </li>
-                <li>
+                <li th:if="${#authorization.expression('hasAuthority(''USER'')')}">
 
                     <a th:href="@{/cart/list}" th:text="${session.cart}" th:unless="${session == null}"
                        class="btn btn-info btn-lg">

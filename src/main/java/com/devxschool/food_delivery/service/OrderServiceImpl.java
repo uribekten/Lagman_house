@@ -16,17 +16,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void placeOrder(Orders order) {
-
+        orderRepository.save(order);
     }
 
     @Override
     public List<Orders> orderList() {
-        return null;
+        return orderRepository.findAll();
     }
 
     @Override
     public List<Orders> userOrderList(CustomUser customUser) {
-        return null;
+
+        return orderRepository.findAllByCustomUser(customUser);
     }
 
     @Override

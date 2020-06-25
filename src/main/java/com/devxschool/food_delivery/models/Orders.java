@@ -22,7 +22,7 @@ public class Orders {
     @ManyToOne
     private CustomUser customUser;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CartItem> cartItemList;
 
     @Enumerated
